@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('index');
     }
 
     /**
@@ -57,6 +57,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        return 'Kebanyakan Edit';
         //
     }
 
