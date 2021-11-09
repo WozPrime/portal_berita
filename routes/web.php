@@ -8,9 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function ()
-{
+Route::get('/home', function () {
     return 'Home';
 });
 
 Route::get('/login', [UserController::class, 'category']);
+
+Route::resource('/comment', UserController::class);
