@@ -11,4 +11,9 @@ class UserController extends Controller
     {
         return view('category');
     }
+
+    public function list()
+    {
+        return view('list');
+    }
 }
