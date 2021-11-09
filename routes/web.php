@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
@@ -11,6 +12,6 @@ Route::get('/home', function () {
     return 'Home';
 });
 
-
+Route::get('/login', [UserController::class, 'category']);
 
 Route::resource('/comment', UserController::class);
