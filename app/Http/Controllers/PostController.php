@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $post = {"name": "WoZPrime telah mencapai lantai 12 di abyss version 3.1"};
+
+        return $post;        
     }
 
     /**
