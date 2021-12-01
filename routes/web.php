@@ -11,12 +11,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
 Route::resource('/comment', UserController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/', function () {
@@ -26,3 +21,5 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/profile', function () {
     });
 });
+
+Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
