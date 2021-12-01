@@ -16,3 +16,13 @@ Auth::routes();
 Route::resource('/comment', UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth'])->prefix('user')->group(function () {
+    Route::get('/', function () {
+        return "Dashboard";
+    });
+
+    Route::get('/profile', function () {
+    });
+});
