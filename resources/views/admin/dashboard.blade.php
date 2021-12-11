@@ -2,11 +2,7 @@
 @section('title')
 Dashboard
 @endsection
-@section('body')
-@section('navbar')
-@endsection
-@section('sidebar')
-@endsection
+
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -296,8 +292,7 @@ Dashboard
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
-                                    <button type="button" class="btn btn-tool" title="Contacts"
-                                        data-widget="chat-pane-toggle">
+                                    <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
                                         <i class="fas fa-comments"></i>
                                     </button>
                                     <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -312,12 +307,11 @@ Dashboard
                                     <!-- Message. Default to the left -->
                                     <div class="direct-chat-msg">
                                         <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-left">Alexander Pierce</span>
+                                            <span class="direct-chat-name float-left">{{Auth::user()->name}}</span>
                                             <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
-                                            alt="message user image">
+                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             Is this template really for free? That's unbelievable!
@@ -333,8 +327,7 @@ Dashboard
                                             <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg"
-                                            alt="message user image">
+                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             You better believe it!
@@ -346,12 +339,11 @@ Dashboard
                                     <!-- Message. Default to the left -->
                                     <div class="direct-chat-msg">
                                         <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-left">Alexander Pierce</span>
+                                            <span class="direct-chat-name float-left">{{Auth::user()->name}}</span>
                                             <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
-                                            alt="message user image">
+                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             Working with AdminLTE on a great new app! Wanna join?
@@ -367,8 +359,7 @@ Dashboard
                                             <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg"
-                                            alt="message user image">
+                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             I would love to.
@@ -385,8 +376,7 @@ Dashboard
                                     <ul class="contacts-list">
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -401,8 +391,7 @@ Dashboard
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user7-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -417,8 +406,7 @@ Dashboard
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user3-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -433,8 +421,7 @@ Dashboard
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user5-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -449,8 +436,7 @@ Dashboard
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user6-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -465,8 +451,7 @@ Dashboard
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user8-128x128.jpg"
-                                                    alt="User Avatar">
+                                                <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Avatar">
 
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
@@ -488,8 +473,7 @@ Dashboard
                             <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="message" placeholder="Type Message ..."
-                                            class="form-control">
+                                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                                         <span class="input-group-append">
                                             <button type="button" class="btn btn-warning">Send</button>
                                         </span>
@@ -523,7 +507,7 @@ Dashboard
                                 <ul class="users-list clearfix">
                                     <li>
                                         <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                                        <a class="users-list-name" href="#">Alexander Pierce</a>
+                                        <a class="users-list-name" href="#">{{Auth::user()->name}}</a>
                                         <span class="users-list-date">Today</span>
                                     </li>
                                     <li>
@@ -885,9 +869,7 @@ Dashboard
 </section>
 <!-- /.content -->
 
-@endsection
 <!-- /.content -->
-@section('footer')
-@endsection
+
 
 @endsection
