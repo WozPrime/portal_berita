@@ -56,6 +56,7 @@ class PostController extends Controller
         }
 
         $post_new = [
+            'judul' => $req->judul,
             'konten' => $dom->saveHTML(),
             // 'konten' => $req->post,
             //tambah kolom kalo ada

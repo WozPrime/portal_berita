@@ -9,13 +9,15 @@
     {{-- Tombol Tambah di Table --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -35,9 +37,13 @@
 
     <!-- show-hide-fields-form -->
     <link rel="stylesheet" href="{{ asset('css/hsff/hide-show-field-form.css') }}">
-    <link rel="stylesheet" href="{{asset('vendor/codemirror/codemirror.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/codemirror/theme/monokai.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/simplemde/simplemde.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/codemirror/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/codemirror/theme/monokai.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/simplemde/simplemde.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
+
 
 </head>
 
@@ -107,13 +113,27 @@
     <script src="{{ asset('dist/js/selectclientbasedoption.js') }}"></script>
     {{-- Get Current Date and Time --}}
     <script src="{{ asset('dist/js/currentdatetime.js') }}"></script>
-    <!-- <script src="{{asset('vendor/summernote/summernote-bs4.min.js')}}"></script> -->
+    <!-- <script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script> -->
     <!-- CodeMirror -->
-    <script src="{{asset('vendor/codemirror/codemirror.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/css/css.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/xml/xml.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
-    <!-- <script src="{{asset('dist/js/demo.js')}}"></script> -->
+    <script src="{{ asset('vendor/codemirror/codemirror.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/css/css.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+    <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+
+    {{-- <script src="{{ asset('datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('datatables-buttons/js/buttons.colVis.min.js') }}"></script> --}}
+
     <script>
         $(function() {
             // Summernote
@@ -126,6 +146,21 @@
             });
         })
     </script>
+    {{-- <script>
+        $(function() {
+
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        }); --}}
+    </script>
+
 
 </body>
 

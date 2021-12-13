@@ -35,9 +35,11 @@
                     <div class="card-body">
                         <form action="{{ asset('/admin/post') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <label>Judul</label>
+                            <input class="form-control" name="judul" id="judul"><br>
                             <textarea id="summernote" name="post">
 
-                  </textarea>
+                                              </textarea>
                             <button class="btn btn-primary">Submit</button>
                         </form>
                     </div>

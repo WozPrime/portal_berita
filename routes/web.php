@@ -28,5 +28,7 @@ Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::cl
 Route::middleware('auth')->get('/post', [App\Http\Controllers\PostController::class, 'post'])->name('post');
 Route::middleware('auth')->post('/admin/post', [App\Http\Controllers\PostController::class, 'postKonten'])->name('postKonten');
 Route::middleware('auth')->get('/view', [App\Http\Controllers\ViewController::class, 'index'])->name('view');
+Route::middleware('auth')->get('/admin/edit/{id?}', [App\Http\Controllers\ViewController::class, 'editKonten'])->name('editID');
+Route::middleware('auth')->post('/admin/edit/{id?}', [App\Http\Controllers\ViewController::class, 'editKonten'])->name('editSubmit');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
