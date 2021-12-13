@@ -33,10 +33,10 @@ Post
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="{{asset('/admin/post')}}" method="post">
+                    <form action="{{asset('/admin/post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <textarea id="summernote" name="post">
-                Place <em>some</em> <u>text</u> <strong>here</strong>
+
               </textarea>
                         <button class="btn btn-primary">Submit</button>
                     </form>
