@@ -6,6 +6,8 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
+use Path\To\DOMDocument;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PostController extends Controller
 {
@@ -25,11 +27,41 @@ class PostController extends Controller
     }
     public function postKonten(Request $req)
     {
+        // dd($req->post);
+
+        //file summernote
+        $storage = "summer/img";
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($req->post, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName("img");
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $fileNameContent = uniqid();
+                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
+                $filepath = ("$storage/$fileNameContentRand.$mimetype");
+                $image = Image::make($src)
+                    // ->resize(1200, 1200)
+                    ->encode($mimetype, 100)
+                    ->save(public_path($filepath));
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+                $img->setAttribute('class', 'img-responsive');
+            }
+        }
+
         $post_new = [
-            'konten' => $req->post,
+            'konten' => $dom->saveHTML(),
+            // 'konten' => $req->post,
             //tambah kolom kalo ada
         ];
         $this->postModel->insertData($post_new);
+        return redirect()->to('/post');
     }
     /**
      * Show the form for creating a new resource.
