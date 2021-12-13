@@ -10,7 +10,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
 
 Route::resource('/comment', UserController::class);
 
@@ -24,5 +25,8 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 });
 
 Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->get('/post', [App\Http\Controllers\PostController::class, 'post'])->name('post');
+Route::middleware('auth')->post('/admin/post', [App\Http\Controllers\PostController::class, 'postKonten'])->name('postKonten');
+Route::middleware('auth')->get('/view', [App\Http\Controllers\ViewController::class, 'index'])->name('view');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

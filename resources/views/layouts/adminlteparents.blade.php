@@ -9,8 +9,7 @@
     {{-- Tombol Tambah di Table --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -28,7 +27,7 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ asset('vendor/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('vendor/summer/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
     {{-- DataTables --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     {{-- Material Design Icon --}}
@@ -36,10 +35,13 @@
 
     <!-- show-hide-fields-form -->
     <link rel="stylesheet" href="{{ asset('css/hsff/hide-show-field-form.css') }}">
+    <link rel="stylesheet" href="{{asset('vendor/codemirror/codemirror.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/codemirror/theme/monokai.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/simplemde/simplemde.min.css')}}">
+
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    @yield('body')
     <div class="wrapper">
 
         {{-- include navbar --}}
@@ -53,7 +55,6 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            @yield('footer')
             <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
@@ -106,6 +107,25 @@
     <script src="{{ asset('dist/js/selectclientbasedoption.js') }}"></script>
     {{-- Get Current Date and Time --}}
     <script src="{{ asset('dist/js/currentdatetime.js') }}"></script>
+    <!-- <script src="{{asset('vendor/summernote/summernote-bs4.min.js')}}"></script> -->
+    <!-- CodeMirror -->
+    <script src="{{asset('vendor/codemirror/codemirror.js')}}"></script>
+    <script src="{{asset('vendor/codemirror/mode/css/css.js')}}"></script>
+    <script src="{{asset('vendor/codemirror/mode/xml/xml.js')}}"></script>
+    <script src="{{asset('vendor/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+    <!-- <script src="{{asset('dist/js/demo.js')}}"></script> -->
+    <script>
+        $(function() {
+            // Summernote
+            $('#summernote').summernote();
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
 
 </body>
 
