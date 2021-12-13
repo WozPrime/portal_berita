@@ -56,6 +56,15 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{asset('/view')}}" class="nav-link {{(request()->is('view')?'active':'')}}">
+            <i class="nav-icon fas fa-eye"></i>
+            <p>
+              View
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{route('logout')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>
