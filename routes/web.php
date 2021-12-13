@@ -26,5 +26,6 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->get('/post', [App\Http\Controllers\PostController::class, 'post'])->name('post');
 Route::middleware('auth')->post('/admin/post', [App\Http\Controllers\PostController::class, 'postKonten'])->name('postKonten');
+Route::middleware('auth')->get('/view', [App\Http\Controllers\ViewController::class, 'index'])->name('view');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
