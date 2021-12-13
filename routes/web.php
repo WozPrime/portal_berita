@@ -12,6 +12,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
+
 Route::resource('/comment', UserController::class);
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
