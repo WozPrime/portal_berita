@@ -53,7 +53,7 @@
                                     <select name="tags[]" class="select2" multiple="multiple" data-placeholder="Select Tags"
                                         data-dropdown-css-class="select2-primary" style="width: 100%;">
                                         @foreach ($tags as $tag)
-                                            <option>{{$tag->tema}}</option>
+                                            <option value="{{$tag->id}}">{{$tag->tema}}</option>
                                         @endforeach
                                     </select>
                                 </div>

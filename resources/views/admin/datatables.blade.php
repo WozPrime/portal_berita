@@ -40,27 +40,44 @@
                                     <th style="width: 10px">No</th>
                                     <th class="col-2">Judul</th>
                                     <th class="col-2">Thumbnail</th>
+                                    <th class="col-1">Tags</th>
                                     <th class="col-2">Status</th>
                                     <th class="col-3">Uploader</th>
                                     <th style="text-align: center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data_post as $post)
+                                @foreach ($data_post->get() as $post)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $post->judul }}</td>
-                                        <td style="text-align: center"><img src="{{ url('thumbnail/' . $post->thumbnail) }}" width="70"></td>
-                                        <td style="text-align: center"><input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                                        <td style="text-align: center"><img
+                                                src="{{ url('thumbnail/' . $post->thumbnail) }}" width="70"></td>
+                                        <td style="text-align: center">
+                                            @foreach ($post->tags as $tag)
+                                                <span
+                                                    class="badge @if (fmod($tag->id, 3) == 0)
+                                                    bg-danger
+                                                    @elseif (fmod($tag->id, 2) == 0)
+                                                    bg-warning
+                                                    @else
+                                                    bg-success                                                                    
+                                                @endif">
+                                                    {{ $tag->tema }}
+                                                </span>
+                                            @endforeach
+                                        </td>
+                                        <td style="text-align: center"><input type="checkbox" name="my-checkbox" checked
+                                                data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                                         <td>{{ $post->uploader }}</td>
                                         <td style="text-align: center">
-                                            <a class="btn btn-primary"
-                                                href="/view/{{ $post->id }}"><i class="fa fa-eye"></i></a>
+                                            <a class="btn btn-primary" href="/view/{{ $post->id }}"><i
+                                                    class="fa fa-eye"></i></a>
                                             <a class="btn btn-danger" data-toggle="modal"
                                                 data-target="#delete{{ $post->id }}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    
+
                                     <div class="modal fade" id="delete{{ $post->id }}">
                                         <div class="modal-dialog">
                                             <div class="modal-content bg-danger">

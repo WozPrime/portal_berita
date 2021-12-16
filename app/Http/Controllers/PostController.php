@@ -37,15 +37,16 @@ class PostController extends Controller
     }
     public function postKonten(Request $req)
     {
-        // dd($req->tags);
+        
+        
         // Validate
         $req->validate([
             'judul' => 'required',
-            'tag[]' => 'required',
+            'tags' => 'required',
             'thumbnail' => 'mimes:jpg,png,jpeg,bmp',
         ], [
             'judul.required' => 'Wajib Diisi!!',
-            'tag[].required' => 'Wajib Diisi!!',
+            'tags.required' => 'Wajib Diisi!!',
         ]);
 
         //file summernote
@@ -88,12 +89,15 @@ class PostController extends Controller
             $this->post->where('id',$id)->update([
                 'thumbnail' => $fileName,
             ]);
+            $create->tags()->attach($req->tags);
+
         }else{
-            $this->post->create([
+            $create = $this->post->create([
                 'konten' => $dom->saveHTML(),
                 'judul' => $req->judul,
                 'uploader' => Auth::user()->name,
             ]);
+            $create->tags()->attach($req->tags);
         }
         return redirect()->to('/post');
     }
@@ -126,7 +130,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $data_post = Post::all();
+        $data_post = $this->post;
+        
         return view('admin.datatables',compact('data_post'));
     }
 
