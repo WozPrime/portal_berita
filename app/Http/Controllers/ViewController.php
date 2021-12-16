@@ -25,7 +25,6 @@ class ViewController extends Controller
         if ($req->id != 'submit') {
             $data['post'] = Post::select('*')
                 ->where('id', $req->id)
-
                 ->get();
             return view('admin/edit', $data);
         } elseif ($req->id == 'submit') {
