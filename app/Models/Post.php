@@ -12,16 +12,23 @@ class Post extends Model
     protected $table = 'posts';
     protected $fillable = [
         'konten',
-
+        'judul',
+        'thumbnail',
+        'uploader'
     ];
-    public function insertData($data)
+
+    public function userPost()
     {
-        try {
-            DB::table('posts')
-                ->insert($data);
-            return 'true';
-        } catch (\Exception $e) {
-            return 'false';
-        }
+        return $this->hasOne(UserPost::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_post','post_id','user_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

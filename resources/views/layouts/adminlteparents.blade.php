@@ -9,13 +9,15 @@
     {{-- Tombol Tambah di Table --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -30,14 +32,18 @@
     <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
     {{-- DataTables --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js">
+    {{-- select2 --}}
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     {{-- Material Design Icon --}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- show-hide-fields-form -->
     <link rel="stylesheet" href="{{ asset('css/hsff/hide-show-field-form.css') }}">
-    <link rel="stylesheet" href="{{asset('vendor/codemirror/codemirror.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/codemirror/theme/monokai.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/simplemde/simplemde.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/codemirror/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/codemirror/theme/monokai.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/simplemde/simplemde.min.css') }}">
 
 </head>
 
@@ -107,17 +113,36 @@
     <script src="{{ asset('dist/js/selectclientbasedoption.js') }}"></script>
     {{-- Get Current Date and Time --}}
     <script src="{{ asset('dist/js/currentdatetime.js') }}"></script>
-    <!-- <script src="{{asset('vendor/summernote/summernote-bs4.min.js')}}"></script> -->
+    <!-- <script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script> -->
     <!-- CodeMirror -->
-    <script src="{{asset('vendor/codemirror/codemirror.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/css/css.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/xml/xml.js')}}"></script>
-    <script src="{{asset('vendor/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
-    <!-- <script src="{{asset('dist/js/demo.js')}}"></script> -->
+    <script src="{{ asset('vendor/codemirror/codemirror.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/css/css.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ asset('vendor/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+    <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+    {{-- Select2 --}}
+    <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
+    {{-- Toggle Switch --}}
+    <script src="{{ asset('vendor/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+
     <script>
         $(function() {
             // Summernote
             $('#summernote').summernote();
+
+            // Select2
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            // switch
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
 
             // CodeMirror
             CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
@@ -125,6 +150,19 @@
                 theme: "monokai"
             });
         })
+    </script>
+    <script type="text/javascript">
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                preview.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
     </script>
 
 </body>

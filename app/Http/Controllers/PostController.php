@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
 use Path\To\DOMDocument;
@@ -12,9 +14,16 @@ use Intervention\Image\ImageManagerStatic as Image;
 class PostController extends Controller
 {
     protected $postModel;
-    public function __construct()
+    public function __construct(Post $post)
     {
         $this->postModel = new Post();
+        $this->post = $post;
+    }
+
+    public function view($id)
+    {
+        $data_post = $this->post->find($id);
+        return view('admin.view',compact('data_post'));
     }
     /**
      * Display a listing of the resource.
@@ -23,11 +32,21 @@ class PostController extends Controller
      */
     public function post()
     {
-        return view('admin.post');
+        $tags = Tag::all();
+        return view('admin.post', compact('tags'));
     }
     public function postKonten(Request $req)
     {
-        // dd($req->post);
+        // dd($req->tags);
+        // Validate
+        $req->validate([
+            'judul' => 'required',
+            'tag[]' => 'required',
+            'thumbnail' => 'mimes:jpg,png,jpeg,bmp',
+        ], [
+            'judul.required' => 'Wajib Diisi!!',
+            'tag[].required' => 'Wajib Diisi!!',
+        ]);
 
         //file summernote
         $storage = "summer/img";
@@ -54,13 +73,28 @@ class PostController extends Controller
                 $img->setAttribute('class', 'img-responsive');
             }
         }
+        
+        if ($req->thumbnail <> "") {
 
-        $post_new = [
-            'konten' => $dom->saveHTML(),
-            // 'konten' => $req->post,
-            //tambah kolom kalo ada
-        ];
-        $this->postModel->insertData($post_new);
+            $create = $this->post->create([
+                'konten' => $dom->saveHTML(),
+                'judul' => $req->judul,
+                'uploader' => Auth::user()->name,
+            ]);
+            $id = $create->id;
+            $file = $req->thumbnail;
+            $fileName = $id . '.' . $file->extension();
+            $file->move(public_path('thumbnail'), $fileName);
+            $this->post->where('id',$id)->update([
+                'thumbnail' => $fileName,
+            ]);
+        }else{
+            $this->post->create([
+                'konten' => $dom->saveHTML(),
+                'judul' => $req->judul,
+                'uploader' => Auth::user()->name,
+            ]);
+        }
         return redirect()->to('/post');
     }
     /**
@@ -92,7 +126,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $data_post = Post::all();
+        return view('admin.datatables',compact('data_post'));
     }
 
     /**
@@ -125,8 +160,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $this->post->findOrFail($id)->delete();
+        return redirect()->back();
     }
 }
