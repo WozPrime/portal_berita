@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('judul');
             $table->string('thumbnail')->nullable();
             $table->text('konten');
+            $table->boolean('status')->default(0);
             $table->string('uploader');
             $table->timestamps();
         });

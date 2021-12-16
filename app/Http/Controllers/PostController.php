@@ -154,9 +154,19 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request)
     {
-        //
+        $status = $this->post->where('id',$request->post_id)->get('status');
+        // dd($status[0]['status']);
+        if ($status->first()->status == 1) {
+           $value = 0;
+        }else{
+            $value = 1;
+        }
+        $this->post->where('id',$request->post_id)->update([
+            'status' => $value,
+        ]);
+        return redirect()->back();
     }
 
     /**

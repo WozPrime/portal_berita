@@ -118,7 +118,7 @@ $(function () {
 
   var salesChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
+    datasets: [ 
       {
         label: 'Digital Goods',
         backgroundColor: 'rgba(60,141,188,0.9)',

@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     {{-- Material Design Icon --}}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {{-- bootstrap 4 --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- show-hide-fields-form -->
     <link rel="stylesheet" href="{{ asset('css/hsff/hide-show-field-form.css') }}">
@@ -47,7 +49,7 @@
 
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
         {{-- include navbar --}}
@@ -105,7 +107,7 @@
     <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.js') }}"></script>
-    <script src="{{ asset('vendor/adminlte/dist/js/pages/dashboard.js') }}"></script>
+    <script src="{{ asset('/js/pages/dashboard2.js') }}"></script>
     {{-- DataTables --}}
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <!-- hide-show-fields-form -->

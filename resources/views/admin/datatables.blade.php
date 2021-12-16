@@ -41,7 +41,7 @@
                                     <th class="col-2">Judul</th>
                                     <th class="col-2">Thumbnail</th>
                                     <th class="col-1">Tags</th>
-                                    <th class="col-2">Status</th>
+                                    <th class="col-1">Status</th>
                                     <th class="col-3">Uploader</th>
                                     <th style="text-align: center">Action</th>
                                 </tr>
@@ -66,9 +66,15 @@
                                                     {{ $tag->tema }}
                                                 </span>
                                             @endforeach
-                                        </td>
-                                        <td style="text-align: center"><input type="checkbox" name="my-checkbox" checked
-                                                data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                                        </td>   
+                                        <td style="text-align: center">
+                                            <div class="form-check form-switch">
+                                                <input data-toggle="modal"
+                                                data-target="#modalToggle{{ $post->id }}" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" 
+                                                {{($post->status) ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                              </div>                                                
+                                            </td>
                                         <td>{{ $post->uploader }}</td>
                                         <td style="text-align: center">
                                             <a class="btn btn-primary" href="/view/{{ $post->id }}"><i
@@ -77,6 +83,36 @@
                                                 data-target="#delete{{ $post->id }}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
+                                    <div class="modal fade" id="modalToggle{{ $post->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-secondary">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Konfirmasi Persetujuan</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" onclick="location.reload();">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin ingin Mengubah Status dari {{ $post->judul }} ini?
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-outline-light"
+                                                        data-dismiss="modal" onclick="location.reload();">Close</button>
+                                                        <form action="/post/update" method="post">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $post->id }}" name="post_id">
+                                                            <button type="submit"
+                                                                class="btn btn-outline-light">Setujui Data</button>
+                                                        </form> 
+                                                    
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                   
 
                                     <div class="modal fade" id="delete{{ $post->id }}">
                                         <div class="modal-dialog">
@@ -102,10 +138,16 @@
                                         </div>
                                         <!-- /.modal-dialog -->
                                     </div>
+                                   
+
+                                  
                                 @endforeach
                             </tbody>
                         </table>
+                       
                     </div>
+                  
+                 
                     <div class="card-footer">
                         <br>
                     </div>
@@ -119,5 +161,11 @@
     </section>
     <!-- /.content -->
     <!-- /.content -->
+    {{-- <script>
+        function toggle(status) {
+            document.getElementById('modalToggle').classList.add='show';
+            // alert(status)
 
+        }
+    </script> --}}
 @endsection

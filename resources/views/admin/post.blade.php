@@ -73,8 +73,8 @@
                             <div class="form-group">
                                 <label for="Preview">Preview</label>
                                 <div>
-                                    <img id="preview" style="max-width:1000px;
-                                                                max-height:1000px;" src="#" alt="" />
+                                    <img id="preview" style="max-width:50%;
+                                                                max-height:50%;" src="#" alt="" />
                                 </div>
                             </div>
                             <div class="form-group">

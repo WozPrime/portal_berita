@@ -71,7 +71,7 @@
                                 <tr>
                                     <th style="width: 10px">No</th>
                                     <th>Tema</th>
-                                    <th colspan="2" style="text-align: center">Action</th>
+                                    <th style="text-align: center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,20 +86,7 @@
                                                 data-target="#delete{{ $tag->id }}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                @endforeach
-                                {{-- @foreach ($data_post as $post)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $post->judul }}</td>
-                                        <td style="text-align: center">
-                                            <a class="btn btn-primary"
-                                                href="/view/{{ $post->id }}"><i class="fa fa-eye"></i></a>
-                                            <a class="btn btn-danger" data-toggle="modal"
-                                                data-target="#delete{{ $post->id }}"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    
-                                    <div class="modal fade" id="delete{{ $post->id }}">
+                                    <div class="modal fade" id="delete{{ $tag->id }}">
                                         <div class="modal-dialog">
                                             <div class="modal-content bg-danger">
                                                 <div class="modal-header">
@@ -110,20 +97,26 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah anda yakin ingin Menghapus data dari {{ $post->judul }} ini?
+                                                    Apakah anda yakin ingin Menghapus data dari {{ $tag->tema }} ini?
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
-                                                    <button type="button" class="btn btn-outline-light"
-                                                        data-dismiss="modal">Close</button>
-                                                    <a href="/post/tables/delete/{{ $post->id }}" type="button"
-                                                        class="btn btn-outline-light">Hapus Data</a>
+                                                    
+                                                        <button type="button" class="btn btn-outline-light"
+                                                            data-dismiss="modal">Close</button>
+                                                    <form action="/tags/{{ $tag->id }}" method="POST">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-outline-light">    
+                                                            Hapus Data</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <!-- /.modal-content -->
                                         </div>
                                         <!-- /.modal-dialog -->
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

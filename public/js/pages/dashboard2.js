@@ -16,7 +16,7 @@ $(function () {
   var salesChartCanvas = $('#salesChart').get(0).getContext('2d')
 
   var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Januari','Febuari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
     datasets: [
       {
         label: 'Digital Goods',
@@ -27,7 +27,20 @@ $(function () {
         pointStrokeColor: 'rgba(60,141,188,1)',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [28, 48, 40, 19, 86, 27, 90]
+        data: [
+          parseInt(document.getElementById('jumlah1').value),
+          parseInt(document.getElementById('jumlah2').value),
+          parseInt(document.getElementById('jumlah3').value),
+          parseInt(document.getElementById('jumlah4').value),
+          parseInt(document.getElementById('jumlah5').value),
+          parseInt(document.getElementById('jumlah6').value),
+          parseInt(document.getElementById('jumlah7').value),
+          parseInt(document.getElementById('jumlah8').value),
+          parseInt(document.getElementById('jumlah9').value),
+          parseInt(document.getElementById('jumlah10').value),
+          parseInt(document.getElementById('jumlah11').value),
+          parseInt(document.getElementById('jumlah12').value)
+      ]
       },
       {
         label: 'Electronics',
@@ -38,7 +51,20 @@ $(function () {
         pointStrokeColor: '#c1c7d1',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [
+          parseInt(document.getElementById('jumlah1').value),
+          parseInt(document.getElementById('jumlah2').value),
+          parseInt(document.getElementById('jumlah3').value),
+          parseInt(document.getElementById('jumlah4').value),
+          parseInt(document.getElementById('jumlah5').value),
+          parseInt(document.getElementById('jumlah6').value),
+          parseInt(document.getElementById('jumlah7').value),
+          parseInt(document.getElementById('jumlah8').value),
+          parseInt(document.getElementById('jumlah9').value),
+          parseInt(document.getElementById('jumlah10').value),
+          parseInt(document.getElementById('jumlah11').value),
+          parseInt(document.getElementById('jumlah12').value)
+      ]
       }
     ]
   }

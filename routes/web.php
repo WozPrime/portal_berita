@@ -31,6 +31,7 @@ Route::middleware(['role', 'auth'])->group(function () {
     Route::get('/post', [App\Http\Controllers\PostController::class, 'post'])->name('post');
     Route::get('/post/tables',[App\Http\Controllers\PostController::class,'show'])->name('post_tables');
     Route::post('/admin/post', [App\Http\Controllers\PostController::class, 'postKonten'])->name('postKonten');
+    Route::post('/post/update', [App\Http\Controllers\PostController::class, 'update'])->name('update');
     Route::get('/view/{id}', [App\Http\Controllers\PostController::class, 'view'])->name('view');
     Route::get('/post/tables/delete/{id}',[App\Http\Controllers\PostController::class, 'destroy'])->name('delete_post');
 
