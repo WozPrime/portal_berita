@@ -41,7 +41,9 @@
                                     <th class="col-2">Judul</th>
                                     <th class="col-2">Thumbnail</th>
                                     <th class="col-1">Tags</th>
-                                    <th class="col-1">Status</th>
+                                    @if (Auth::user()->role == 'admin')
+                                        <th class="col-1">Status</th>
+                                    @endif
                                     <th class="col-3">Uploader</th>
                                     <th style="text-align: center">Action</th>
                                 </tr>
@@ -66,19 +68,23 @@
                                                     {{ $tag->tema }}
                                                 </span>
                                             @endforeach
-                                        </td>   
-                                        <td style="text-align: center">
-                                            <div class="form-check form-switch">
-                                                <input data-toggle="modal"
-                                                data-target="#modalToggle{{ $post->id }}" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" 
-                                                {{($post->status) ? 'checked' : ''}}>
-                                                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                                              </div>                                                
+                                        </td>
+                                        @if (Auth::user()->role == 'admin')
+                                            <td style="text-align: center">
+                                                <div class="form-check form-switch">
+                                                    <input data-toggle="modal" data-target="#modalToggle{{ $post->id }}"
+                                                        class="form-check-input" type="checkbox" role="switch"
+                                                        id="flexSwitchCheckChecked" {{ $post->status ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                                </div>
                                             </td>
+                                        @endif
                                         <td>{{ $post->uploader }}</td>
                                         <td style="text-align: center">
                                             <a class="btn btn-primary" href="/view/{{ $post->id }}"><i
                                                     class="fa fa-eye"></i></a>
+                                            <a class="btn btn-success"
+                                                href="/post/{{ $post->id }}/edit"><i class="fa fa-edit"></i></a>
                                             <a class="btn btn-danger" data-toggle="modal"
                                                 data-target="#delete{{ $post->id }}"><i class="fa fa-trash"></i></a>
                                         </td>
@@ -97,22 +103,22 @@
                                                     Apakah anda yakin ingin Mengubah Status dari {{ $post->judul }} ini?
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
-                                                    <button type="button" class="btn btn-outline-light"
-                                                        data-dismiss="modal" onclick="location.reload();">Close</button>
-                                                        <form action="/post/update" method="post">
-                                                            @csrf
-                                                            <input type="hidden" value="{{ $post->id }}" name="post_id">
-                                                            <button type="submit"
-                                                                class="btn btn-outline-light">Setujui Data</button>
-                                                        </form> 
-                                                    
+                                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal"
+                                                        onclick="location.reload();">Close</button>
+                                                    <form action="/post/update" method="post">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $post->id }}" name="post_id">
+                                                        <button type="submit" class="btn btn-outline-light">Setujui
+                                                            Data</button>
+                                                    </form>
+
                                                 </div>
                                             </div>
                                             <!-- /.modal-content -->
                                         </div>
                                         <!-- /.modal-dialog -->
                                     </div>
-                                   
+
 
                                     <div class="modal fade" id="delete{{ $post->id }}">
                                         <div class="modal-dialog">
@@ -138,16 +144,16 @@
                                         </div>
                                         <!-- /.modal-dialog -->
                                     </div>
-                                   
 
-                                  
+
+
                                 @endforeach
                             </tbody>
                         </table>
-                       
+
                     </div>
-                  
-                 
+
+
                     <div class="card-footer">
                         <br>
                     </div>

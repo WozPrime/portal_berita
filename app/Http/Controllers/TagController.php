@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TagController extends Controller
 {
@@ -45,6 +46,7 @@ class TagController extends Controller
             'tema'=>$req->tema
         ];
         $this->tag->insert($data);
+        Alert::success('Sukses', 'Tag berhasil ditambahkan!');
         return redirect()->to('/tags');
     }
 
@@ -91,6 +93,7 @@ class TagController extends Controller
     public function destroy($id)
     {   
         $this->tag->findOrFail($id)->delete();
+        Alert::success('Sukses', 'Tag berhasil dihapus!');
         return redirect()->back();
     }
    

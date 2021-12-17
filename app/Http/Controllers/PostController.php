@@ -10,6 +10,8 @@ use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
 use Path\To\DOMDocument;
 use Intervention\Image\ImageManagerStatic as Image;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class PostController extends Controller
 {
@@ -23,7 +25,7 @@ class PostController extends Controller
     public function view($id)
     {
         $data_post = $this->post->find($id);
-        return view('admin.view',compact('data_post'));
+        return view('admin.view', compact('data_post'));
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +39,8 @@ class PostController extends Controller
     }
     public function postKonten(Request $req)
     {
-        
-        
+
+
         // Validate
         $req->validate([
             'judul' => 'required',
@@ -74,7 +76,7 @@ class PostController extends Controller
                 $img->setAttribute('class', 'img-responsive');
             }
         }
-        
+
         if ($req->thumbnail <> "") {
 
             $create = $this->post->create([
@@ -86,12 +88,11 @@ class PostController extends Controller
             $file = $req->thumbnail;
             $fileName = $id . '.' . $file->extension();
             $file->move(public_path('thumbnail'), $fileName);
-            $this->post->where('id',$id)->update([
+            $this->post->where('id', $id)->update([
                 'thumbnail' => $fileName,
             ]);
             $create->tags()->attach($req->tags);
-
-        }else{
+        } else {
             $create = $this->post->create([
                 'konten' => $dom->saveHTML(),
                 'judul' => $req->judul,
@@ -99,6 +100,8 @@ class PostController extends Controller
             ]);
             $create->tags()->attach($req->tags);
         }
+
+        Alert::success('Sukses', 'Post berhasil ditambahkan!');
         return redirect()->to('/post');
     }
     /**
@@ -128,11 +131,15 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show()
     {
-        $data_post = $this->post;
-        
-        return view('admin.datatables',compact('data_post'));
+        $data_post = null;
+        if (Auth::user()->role == 'admin') {
+            $data_post = $this->post;
+        } else {
+            $data_post = $this->post->where('uploader', '=', Auth::user()->name);
+        }
+        return view('admin.datatables', compact('data_post'));
     }
 
     /**
@@ -141,9 +148,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        return 'Kebanyakan Edit';
+        $edit_data = $this->post->where('id', $id)->first();
+        $tags = Tag::all();
+        return view('admin.edit', compact('edit_data', 'tags'));
         //
     }
 
@@ -156,17 +165,76 @@ class PostController extends Controller
      */
     public function update(Request $request)
     {
-        $status = $this->post->where('id',$request->post_id)->get('status');
+        $status = $this->post->where('id', $request->post_id)->get('status');
         // dd($status[0]['status']);
         if ($status->first()->status == 1) {
-           $value = 0;
-        }else{
+            $value = 0;
+        } else {
             $value = 1;
         }
-        $this->post->where('id',$request->post_id)->update([
+        $this->post->where('id', $request->post_id)->update([
             'status' => $value,
         ]);
+        Alert::success('Sukses', 'Status berhasil dirubah!');
         return redirect()->back();
+    }
+
+    public function update_post(Request $req)
+    {
+        $updatedPost = $this->post->where('id', $req->id);
+        //file summernote
+        $storage = "summer/img";
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($req->post, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName("img");
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $fileNameContent = uniqid();
+                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
+                $filepath = ("$storage/$fileNameContentRand.$mimetype");
+                $image = Image::make($src)
+                    // ->resize(1200, 1200)
+                    ->encode($mimetype, 100)
+                    ->save(public_path($filepath));
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+                $img->setAttribute('class', 'img-responsive');
+            }
+        }
+
+        if ($req->thumbnail <> "") {
+
+            $updated = $updatedPost->update([
+                'konten' => $dom->saveHTML(),
+                'judul' => $req->judul,
+                'uploader' => Auth::user()->name,
+            ]);
+            $id = $updated->id;
+            $file = $req->thumbnail;
+            $fileName = $id . '.' . $file->extension();
+            $file->move(public_path('thumbnail'), $fileName);
+            $this->post->where('id', $id)->update([
+                'thumbnail' => $fileName,
+            ]);
+            $updatedPost->tags->attach($req->tags);
+        } else {
+            $updated = $updatedPost->update([
+                'konten' => $dom->saveHTML(),
+                'judul' => $req->judul,
+                'uploader' => Auth::user()->name,
+            ]);
+            $updatedPost->first()->tags()->detach();
+            $updatedPost->first()->tags()->attach($req->tags);
+        }
+
+        Alert::success('Sukses', 'Post berhasil diedit!');
+        return redirect()->to('/post/tables');
     }
 
     /**
@@ -178,6 +246,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $this->post->findOrFail($id)->delete();
+        Alert::success('Sukses', 'Post berhasil dihapus!');
         return redirect()->back();
     }
 }

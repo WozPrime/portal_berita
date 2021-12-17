@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+    <a href="/home" class="brand-link text-decoration-none">
+        <img src="{{ asset('logo/portal.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-bold">Portal Berita</span>
     </a>
 
     <!-- Sidebar -->
@@ -56,17 +56,17 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ asset('/post/tables') }}"
+                        class="nav-link {{ \Request::route()->getName() == 'post_tables' || \Request::route()->getName() == 'view' || \Request::route()->getName() == 'edit_post' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-external-link-square-alt"></i>
+                        <p>
+                            Post Table
+                            <!-- <i class="right fas fa-angle-left"></i> -->
+                        </p>
+                    </a>
+                </li>
                 @if (Auth::user()->role == 'admin')
-                    <li class="nav-item">
-                        <a href="{{ asset('/post/tables') }}"
-                            class="nav-link {{ \Request::route()->getName() == 'post_tables' || \Request::route()->getName() == 'view' ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-external-link-square-alt"></i>
-                            <p>
-                                Post Table
-                                <!-- <i class="right fas fa-angle-left"></i> -->
-                            </p>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a href="{{ asset('/tags') }}"
                             class="nav-link {{ \Request::route()->getName() == 'tags.index' ? 'active' : '' }}">
