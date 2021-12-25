@@ -105,15 +105,6 @@
     <!-- masonry
    ================================================== -->
     
-	<script>
-		$(function(){
-			// Summernote
-            $('#summernote').summernote();
-		})
-		// var plainText = $($("#summernote").summernote("code")).text()
-		console.log(plaintext);
-	</script>
-    @yield('script')
     <!-- footer
    ================================================== -->
     <footer>
@@ -218,6 +209,13 @@
     <script src="{{ asset('guest/js/plugins.js') }}"></script>
     <script src="{{ asset('guest/js/jquery.appear.js') }}"></script>
     <script src="{{ asset('guest/js/main.js') }}"></script>
+    <script>
+		$(function(){
+			// Summernote
+            $('#summernote').summernote();
+		})
+	</script>
+    @yield('script')
 
 </body>
 

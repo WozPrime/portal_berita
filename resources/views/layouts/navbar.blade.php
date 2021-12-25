@@ -143,10 +143,12 @@
                       <img src="{{ url('pp/' . Auth::user()->pp) }}" class="user-image img-circle elevation-2"
                           alt="{{ Auth::user()->name }}">
                   @endif --}}
+                  <img src="{{asset('dist/img/user_default.jpg') }}" class="user-image img-circle elevation-2"
+                          alt="{{ Auth::user()->name }}">
 
                   <p class="text-light">
                       {{ Auth::user()->name }} - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <small>Member since {{ Auth::user()->created_at->format('M d, Y')}}</small>
                   </p>
               </li>
               <!-- Menu Body -->

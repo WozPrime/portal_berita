@@ -18,26 +18,29 @@
                         <div id="featured-post-slider" class="flexslider">
                             <ul class="slides">
                                 @foreach ($newPost as $new)
-                                    <li>
-                                        <div class="featured-post-slide">
+                                    @if ($new->status)
+                                        <li>
+                                            <div class="featured-post-slide">
 
-                                            <div class="post-background"
-                                                style="background-image:url({{ url('thumbnail/' . $new->thumbnail) }});">
+                                                <div class="post-background"
+                                                    style="background-image:url({{ url('thumbnail/' . $new->thumbnail) }});">
+                                                </div>
+
+                                                <div class="overlay"></div>
+
+                                                <div class="post-content">
+                                                    <ul class="entry-meta">
+                                                        <li>{{ $new->updated_at->format('M d, Y') }}</li>
+                                                        <li><a>{{ $new->uploader }}</a></li>
+                                                    </ul>
+
+                                                    <h1 class="slide-title"><a href="/news/{{ $new->id }}"
+                                                            title="">{{ $new->judul }}</a></h1>
+                                                </div>
+
                                             </div>
-
-                                            <div class="overlay"></div>
-
-                                            <div class="post-content">
-                                                <ul class="entry-meta">
-                                                    <li>{{ $new->updated_at->format('M d, Y') }}</li>
-                                                    <li><a>{{ $new->uploader }}</a></li>
-                                                </ul>
-
-                                                <h1 class="slide-title"><a href="" title="">{{ $new->judul }}</a></h1>
-                                            </div>
-
-                                        </div>
-                                    </li> <!-- /slide -->
+                                        </li> <!-- /slide -->
+                                    @endif
                                 @endforeach
 
                             </ul> <!-- end slides -->
@@ -45,8 +48,10 @@
                     </div> <!-- end entry content -->
                 </div>
                 @foreach ($posts as $post)
-                    @if ($loop->index > 2)
-                        @include('home.layouts.article',['post'=>$post],['tags' => $tags,])
+                    @if ($post->status)
+                        @if ($loop->index > 2)
+                            @include('home.layouts.article',['post'=>$post],['tags' => $tags,])
+                        @endif
                     @endif
                 @endforeach
 
@@ -367,15 +372,16 @@
             {{-- {{dd($posts)}} --}}
             <nav class="pagination">
                 @if ($posts->currentPage() == 1)
-                <span class="page-numbers prev inactive">Prev</span>
-                 @else
+                    <span class="page-numbers prev inactive">Prev</span>
+                @else
                     <a href="{{ $posts->previousPageUrl() }}" class="page-numbers next ">Prev</a>
                 @endif
 
                 @for ($i = 1; $i <= $posts->lastPage(); $i++)
-                <a href="{{$posts->url($i)}}" class="page-numbers @if ($i==$posts->currentPage())
+                    <a href="{{ $posts->url($i) }}"
+                        class="page-numbers @if ($i == $posts->currentPage())
                     current
-                @endif">{{$i}}</a>
+                @endif">{{ $i }}</a>
 
                 @endfor
 

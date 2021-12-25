@@ -181,7 +181,7 @@ class PostController extends Controller
 
     public function update_post(Request $req)
     {
-        $updatedPost = $this->post->where('id', $req->id);
+        $updatedPost = $this->post->find($req->id);
         //file summernote
         $storage = "summer/img";
         $dom = new \DOMDocument();
@@ -215,22 +215,24 @@ class PostController extends Controller
                 'judul' => $req->judul,
                 'uploader' => Auth::user()->name,
             ]);
-            $id = $updated->id;
+            $id = $req->id;
             $file = $req->thumbnail;
             $fileName = $id . '.' . $file->extension();
             $file->move(public_path('thumbnail'), $fileName);
             $this->post->where('id', $id)->update([
                 'thumbnail' => $fileName,
             ]);
-            $updatedPost->tags->attach($req->tags);
+            
+            $updatedPost->find($id)->tags()->detach();    
+            $updatedPost->find($id)->tags()->attach($req->tags);
         } else {
             $updated = $updatedPost->update([
                 'konten' => $dom->saveHTML(),
                 'judul' => $req->judul,
                 'uploader' => Auth::user()->name,
             ]);
-            $updatedPost->first()->tags()->detach();
-            $updatedPost->first()->tags()->attach($req->tags);
+            $updatedPost->find($req->id)->tags()->detach();
+            $updatedPost->find($req->id)->tags()->attach($req->tags);
         }
 
         Alert::success('Sukses', 'Post berhasil diedit!');

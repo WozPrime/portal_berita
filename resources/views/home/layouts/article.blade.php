@@ -1,6 +1,6 @@
 <article class="brick entry format-standard animate-this">
     <div class="entry-thumb">
-        <a href="single-standard.html" class="thumb-link">
+        <a href="/news/{{$post->id}}" class="thumb-link">
             <img src="{{ url('thumbnail/' . $post->thumbnail) }}" alt="building">
         </a>
     </div>
@@ -20,8 +20,9 @@
                 </span>
             </div>
 
-            <h1 class="entry-title"><a href="single-standard.html">{{ $post->judul }}</a>
+            <h1 class="entry-title"><a href="/news/{{$post->id}}">{{ $post->judul }}</a>
             </h1>
+
 
         </div>
         

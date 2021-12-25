@@ -73,7 +73,7 @@
 
 </head>
 
-<body class="@yield('classes_body')" @yield('body_data')>
+<body style="background-image:url({{asset('logo/background.jpg')}}); background-size: cover;" class="@yield('classes_body')" @yield('body_data')>
 
     {{-- Body Content --}}
     @yield('body')

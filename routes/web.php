@@ -9,8 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\Role;
 use Illuminate\Support\Facades\Auth;
 
-
+// GUEST
 Route::get('/', [GuestHomeController::class,'index'])->name('home_page');
+Route::get('/news/{id}',[GuestHomeController::class,'show'])->name('news_page');
 
 Auth::routes();
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
